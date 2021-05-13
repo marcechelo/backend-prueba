@@ -109,7 +109,7 @@ export class GithubUserController {
     },
   })
   async findById(
-    @param.path.number('id') id: string,
+    @param.path.string('id') id: string,
     @param.filter(GithubUser, {exclude: 'where'}) filter?: FilterExcludingWhere<GithubUser>
   ): Promise<GithubUser> {
     return this.githubUserRepository.findById(id, filter);
@@ -120,7 +120,7 @@ export class GithubUserController {
     description: 'GithubUser PATCH success',
   })
   async updateById(
-    @param.path.number('id') id: string,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -138,7 +138,7 @@ export class GithubUserController {
     description: 'GithubUser PUT success',
   })
   async replaceById(
-    @param.path.number('id') id: string,
+    @param.path.string('id') id: string,
     @requestBody() githubUser: GithubUser,
   ): Promise<void> {
     await this.githubUserRepository.replaceById(id, githubUser);
@@ -148,7 +148,7 @@ export class GithubUserController {
   @response(204, {
     description: 'GithubUser DELETE success',
   })
-  async deleteById(@param.path.number('id') id: string): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.githubUserRepository.deleteById(id);
   }
 }
